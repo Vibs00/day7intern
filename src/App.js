@@ -24,9 +24,20 @@ let App2 = (props)=> {
 
   return (
     <div>
+      <OtherComponent cName="styled" msg="Loop Used:"/>
       {messages()}
       {i}
-      <OtherComponent cName="styled" msg="hello react"/>
+    </div>
+  );
+}
+
+let App3 = (props)=> {
+  let i = props.msg.map((element)=><h1 className={props.cName}>{element}</h1>);
+
+  return (
+    <div>
+      <OtherComponent cName="styled" msg="Map Used:"/>
+      {i}
     </div>
   );
 }
@@ -48,6 +59,7 @@ function OtherComponent2(props){
   <p className={props.cName}>No message to show</p>;
 }
 
+
 function Parent(){
   return(
     <div>
@@ -57,6 +69,7 @@ function Parent(){
       <OtherComponent2 cName='styled' msg='Using ternary operator'></OtherComponent2>
       <OtherComponent2/>
       <App2 cName='app_styled' msg={["First Message","Second Message"]} />
+      <App3 cName='app_styled' msg={["First Message","Second Message"]} />
     </div>
   );
 }
