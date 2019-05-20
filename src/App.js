@@ -1,26 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
+let App = (props)=> {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>{props.msg1}</h1>
+      <h1>{props.msg2}</h1>
     </div>
   );
 }
 
-export default App;
+function OtherComponent(props){
+  let obj;
+  if(props.msg){
+    obj = <p className={props.cName}>{props.msg}</p>;
+  }
+  else{
+    obj = (<p className={props.cName}>No message to show</p>);
+  }
+  return obj;
+}
+
+function OtherComponent2(props){
+  return props.msg ? 
+  <p className={props.cName}>{props.msg}</p> : 
+  <p className={props.cName}>No message to show</p>;
+}
+
+function Parent(){
+  return(
+    <div>
+      <App msg1='First Message' msg2='Second Message'></App>
+      <OtherComponent cName='styled' msg='Using if...else'></OtherComponent>
+      <OtherComponent/>
+      <OtherComponent2 cName='styled' msg='Using ternary operator'></OtherComponent2>
+      <OtherComponent2/>
+    </div>
+  );
+}
+
+export default Parent;
